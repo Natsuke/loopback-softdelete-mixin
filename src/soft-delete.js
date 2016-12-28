@@ -43,8 +43,8 @@ export default (Model, { deletedAt = 'deletedAt', scrub = false }) => {
     const callback = (cb === undefined && typeof options === 'function') ? options : cb;
 
     return this.updateAttributes({ ...scrubbed, [deletedAt]: new Date() })
-      .then(result => (typeof cb === 'function') ? callback(null, result) : result)
-      .catch(error => (typeof cb === 'function') ? callback(error) : Promise.reject(error));
+      .then(result => (typeof callback === 'function') ? callback(null, result) : result)
+      .catch(error => (typeof callback === 'function') ? callback(error) : Promise.reject(error));
   };
 
   Model.prototype.remove = Model.prototype.destroy;
